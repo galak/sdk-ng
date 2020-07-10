@@ -18,7 +18,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
 
-POKY_KNOWN_COMMIT=${POKY_COMMIT:-"dc8508f609974cc99606b9042bfa7f870ce80228"}
+POKY_KNOWN_COMMIT=${POKY_COMMIT:-"8cce277552559a2c21e33dc394065664838f57f2"}
 META_ZEPHYR_SDK_SOURCE=${SDK_SOURCE:-"meta-zephyr-sdk"}
 META_POKY_SOURCE=${POKY_SOURCE:-"poky"}
 META_ZEPHYR_SDK_SOURCE=$(readlink -f $META_ZEPHYR_SDK_SOURCE)
@@ -30,19 +30,10 @@ if [ ! -d $META_ZEPHYR_SDK_SOURCE ] ; then
 fi
 
 if [ ! -d $META_POKY_SOURCE ] ; then
-	git clone http://git.yoctoproject.org/git/poky
+	git clone https://github.com/galak/poky.git
 	META_POKY_SOURCE=$(readlink -f "poky")
 fi
 
 # Checkout the commit known to build...
 cd $META_POKY_SOURCE
 git checkout $POKY_KNOWN_COMMIT
-
-# Patch poky with meta-zephyr-sdk patches
-if [ -d $META_ZEPHYR_SDK_SOURCE/patches ] ; then
-	echo "Patching poky in: $PWD"
-	for i in $META_ZEPHYR_SDK_SOURCE/patches/*.patch;
-	do
-	    patch -s -p1 < $i;
-	done
-fi
