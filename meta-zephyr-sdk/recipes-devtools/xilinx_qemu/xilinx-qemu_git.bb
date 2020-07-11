@@ -9,6 +9,7 @@ SRCREV = "293badb9e42930393d2246cbc4d0eb78409243ba"
 SRC_URI = "git://github.com/Xilinx/qemu.git;protocol=https \
 	   file://0001-Revert-target-arm-Revert-back-to-YIELD-for-WFI.patch \
 	   file://0002-Enable-WFI-CPU-halting-in-icount-mode.patch \
+	   file://0003-etrace-Fix-off-by-one-error-caught-by-recent-GCC.patch \
 "
 
 BBCLASSEXTEND = "native nativesdk"

@@ -1,0 +1,26 @@
+From 6c6a1f04d5244ba7e02dd0187281ddee0be852e2 Mon Sep 17 00:00:00 2001
+From: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>
+Date: Fri, 24 Jan 2020 08:56:24 +0100
+Subject: [PATCH] etrace: Fix off-by-one error caught by recent GCC
+
+Signed-off-by: Edgar E. Iglesias <edgar.iglesias@xilinx.com>
+---
+ etrace.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/etrace.c b/etrace.c
+index fae60de495..7e9b6dc419 100644
+--- a/etrace.c
++++ b/etrace.c
+@@ -220,7 +220,7 @@ static int sk_unix_client(const char *descr)
+     memset(&addr, 0, sizeof addr);
+     addr.sun_family = AF_UNIX;
+     strncpy(addr.sun_path, descr + strlen(UNIX_PREFIX),
+-            sizeof addr.sun_path);
++            sizeof addr.sun_path - 1);
+     if (connect(fd, (struct sockaddr *)&addr, sizeof(addr)) >= 0) {
+         return fd;
+     }
+-- 
+2.25.4
+

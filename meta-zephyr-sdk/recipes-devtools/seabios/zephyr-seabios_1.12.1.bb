@@ -32,10 +32,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504         
 SRC_URI[md5sum] = "6cb6cba431fd725126ddb5ec529ab85c"
 SRC_URI[sha256sum] = "89ba3f3e3436008992e2304ca1afa1a9527e77c309d896d1b0332e97339f6127"
 
-DEPENDS = "util-linux-native file-native bison-native flex-native gettext-native python-native"
+DEPENDS = "util-linux-native file-native bison-native flex-native gettext-native python3-native"
 
 TUNE_CCARGS = ""
 EXTRA_OEMAKE += "HOSTCC='${BUILD_CC}'"
+EXTRA_OEMAKE += "PYTHON=python3"
 EXTRA_OEMAKE += "CROSS_PREFIX=${TARGET_PREFIX}"
 EXTRA_OEMAKE += "EXTRAVERSION='-zephyr'"
 

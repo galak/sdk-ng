@@ -1,8 +1,7 @@
 DESCRIPTION = "Standalone tarball containing various host SDK packages for Zephyr development."
 SUMMARY = "Standalone tarball for running Zephyr SDK builds on all systems"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690 \
-                    file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
 TOOLCHAIN_TARGET_TASK ?= ""
 
@@ -24,6 +23,7 @@ inherit populate_sdk
 inherit toolchain-scripts
 
 create_sdk_files_append () {
+	echo "GALA ${SDK_OUTPUT} [${SDKPATH}] [${SDK_SYS}] [${HOST_SYS}]"
 	rm -f ${SDK_OUTPUT}/${SDKPATH}/site-config-*
 	rm -f ${SDK_OUTPUT}/${SDKPATH}/environment-setup-*
 	rm -f ${SDK_OUTPUT}/${SDKPATH}/version-*
@@ -34,7 +34,7 @@ create_sdk_files_append () {
 	rm -rfv ${SDK_OUTPUT}/${SDKPATH}/sysroots/${SDK_SYS}/var
 	rm -rfv ${SDK_OUTPUT}/${SDKPATH}/sysroots/${SDK_SYS}/sbin
 
-	rm -rfv ${SDK_OUTPUT}/${SDKPATH}/sysroots/${MULTIMACH_HOST_SYS}
+	rm -rfv ${SDK_OUTPUT}/${SDKPATH}/sysroots/${HOST_SYS}
 
 	# Generate new sdk-environment-setup stub file
 	script=${1:-${SDK_OUTPUT}/${SDKPATH}/environment-setup-${SDK_SYS}}
