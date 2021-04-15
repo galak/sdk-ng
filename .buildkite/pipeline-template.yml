@@ -32,10 +32,12 @@ steps:
          cd build/output
          case "$${TARGET}" in
            xtensa_*)
+             rm -f xtensa/*/newlib-nano
              tar --exclude='build.log.bz2' -jcvf ../../$${TARGET}.$MACHINE.tar.bz2 xtensa/$${TARGET#xtensa_}/*-zephyr-*;
              buildkite-agent artifact upload xtensa/$${TARGET#xtensa_}/*-zephyr-*/build.log.bz2
              ;;
            *)
+             rm -f */newlib-nano
              tar --exclude='build.log.bz2' -jcvf ../../$${TARGET}.$MACHINE.tar.bz2 *-zephyr-*;
              buildkite-agent artifact upload *-zephyr-*/build.log.bz2
              ;;
